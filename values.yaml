@@ -1,7 +1,7 @@
 ---
 singleNode: true
 antiAffinity: "soft"
-esJavaOpts: "-Xmx128m -Xms128m"
+esJavaOpts: "-Xmx512m -Xms512m"
 replicas: 1
 minimumMasterNodes: 1
 clusterHealthCheckParams: 'wait_for_status=yellow&timeout=1s'
@@ -11,7 +11,7 @@ resources:
     memory: "1024M"
   limits:
     cpu: "1000m"
-    memory: "1024M"
+    memory: "2048M"
 volumeClaimTemplate:
   accessModes: [ "ReadWriteOnce" ]
   resources:
