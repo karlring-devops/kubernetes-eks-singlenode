@@ -9,6 +9,12 @@ kdelobjs(){  #--- <object_type:pods,svc,nodes,rc,rs,pv,pvc,sts> <namespace> <REX
   done
 }
 
+setup_code(){
+	mkdir ~/.helm
+	cd kubernetes-elk-singlenode
+	cp *.* ~/.helm/	
+}
+
 setup_helm(){
 	# /-- helm setup ---/
 	kubectl cluster-info
