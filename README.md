@@ -1,7 +1,7 @@
 # kubernetes-elk-singlenode
-kubernetes-elk-singlenode
+Install and setup ELK Single Node on single master multi slave k8s cluster.
 
-_Assumes the following k8s configuration_
+_Assumes the following k8s configuration_:
 
 NAME            STATUS   ROLES    AGE     VERSION
 
