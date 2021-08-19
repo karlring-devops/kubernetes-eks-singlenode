@@ -1,2 +1,2 @@
-# kubernetes-eks-singlenode
-kubernetes-eks-singlenode
+# kubernetes-elk-singlenode
+kubernetes-elk-singlenode
