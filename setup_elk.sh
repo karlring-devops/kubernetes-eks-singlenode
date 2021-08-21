@@ -74,6 +74,27 @@ setup_metricbeat(){
 	helm install --name metricbeat elastic/metricbeat
 }
 
+setup_filebeat(){
+	# /--- filebeat setup ---/
+	cd ~/.helm
+	helm del --purge filebeat
+	helm repo add elastic https://helm.elastic.co
+	helm install --name filebeat elastic/filebeat
+
+	# Source: https://www.elastic.co/guide/en/beats/filebeat/current/running-on-kubernetes.html
+	# curl -L -O https://raw.githubusercontent.com/elastic/beats/7.14/deploy/kubernetes/filebeat-kubernetes.yaml
+}
+
+setup_logstash(){
+	# /--- logstash setup ---/
+	cd ~/.helm
+	helm del --purge logstash
+	helm repo add elastic https://helm.elastic.co 
+	helm install --name logstash elastic/logstash --set replicas=2
+
+	# Reference: https://alexander.holbreich.org/logstash-kubernetes/
+
+}
 
 # /****************************/
 # / REMOVE
@@ -129,4 +150,28 @@ rmMetricBeat(){
 	kubectl delete clusterrole metricbeat-metricbeat-cluster-role
 	kubectl delete -n default serviceaccount metricbeat-kube-state-metrics
 	kubectl delete -n default serviceaccount metricbeat-metricbeat
+}
+
+rmFileBeat(){
+
+	kubectl delete -n kube-system daemonset filebeat
+	kubectl delete -n kube-system pod filebeat-mm5g5
+	kubectl delete -n kube-system pod filebeat-s5txj
+	kubectl delete -n kube-system configmap filebeat-config
+	kubectl delete -n kube-system secret filebeat-token-q59lt
+	kubectl delete clusterrolebinding filebeat
+	kubectl delete clusterrole filebeat
+	kubectl delete -n kube-system rolebinding filebeat
+	kubectl delete -n kube-system rolebinding filebeat-kubeadm-config
+	kubectl delete -n kube-system role filebeat
+	kubectl delete -n kube-system role filebeat-kubeadm-config
+	kubectl delete -n kube-system serviceaccount filebeat
+}
+
+rmLogstash(){
+	kubectl delete -n default statefulset logstash-logstash
+	kubectl delete -n default service logstash-logstash-headless
+	kubectl delete -n kube-system configmap logstash.v1
+	kubectl delete -n default pod logstash-logstash-0
+	kubectl delete poddisruptionbudgets logstash-logstash-pdb
 }
