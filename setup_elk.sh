@@ -66,10 +66,8 @@ setup_tiller(){
 
 setup_storage(){
 	# /-- storage setup ---/
-	kubectl delete sc standard
 	kubectl create -f k8s-default-storage-class.yaml
 	kubectl patch storageclass standard -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
-	kubectl delete pv pv-standard
 	kubectl create -f k8s-default-storage-class-volume.yaml
 }
 
