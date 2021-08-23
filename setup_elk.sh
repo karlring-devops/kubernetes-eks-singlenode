@@ -206,6 +206,20 @@ rmFileBeat(){
 	kubectl delete -n kube-system serviceaccount filebeat
 }
 
+rmHeartbeat(){
+	kubectl delete -n kube-system deployment heartbeat
+	kubectl delete -n kube-system serviceaccount heartbeat
+	kubectl delete -n kube-system role heartbeat-kubeadm-config
+	kubectl delete -n kube-system role heartbeat
+	kubectl delete -n kube-system rolebinding heartbeat-kubeadm-config
+	kubectl delete -n kube-system rolebinding heartbeat
+	kubectl delete clusterrole heartbeat
+	kubectl delete clusterrolebinding heartbeat
+	kdelobjs secret kube-system heartbeat
+	#kubectl delete -n kube-system secret heartbeat-token-jjpmj
+	kubectl delete -n kube-system configmap heartbeat-deployment-config
+}
+
 rmLogstash(){
 	kubectl delete -n default statefulset logstash-logstash
 	kubectl delete -n default service logstash-logstash-headless
