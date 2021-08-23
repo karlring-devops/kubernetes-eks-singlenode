@@ -94,13 +94,12 @@ setup_kibana(){
 
 setup_metricbeat(){
 	# /--- metricbeat setup ---/
-	sleep 60
+	helm del --purge metricbeat
 	helm install --name metricbeat elastic/metricbeat
 }
 
 setup_filebeat(){
 	# /--- filebeat setup ---/
-	cd ~/.helm
 	helm del --purge filebeat
 	helm repo add elastic https://helm.elastic.co
 	helm install --name filebeat elastic/filebeat
@@ -111,7 +110,6 @@ setup_filebeat(){
 
 setup_logstash(){
 	# /--- logstash setup ---/
-	cd ~/.helm
 	helm del --purge logstash
 	helm repo add elastic https://helm.elastic.co 
 	helm install --name logstash elastic/logstash --set replicas=2
