@@ -85,9 +85,10 @@ setup_elastic(){
 setup_kibana(){
 	# /-- kibana setup ---/
 	helm install --name kibana elastic/kibana 
-	sleep 60
+	sleep 200
 	kubectl port-forward deployment/kibana-kibana 5601 &
 	sleep 10
+	kubectl edit svc kibana-kibana -n default
 	kubectl logs -n default $(kubectl get pods -n default | grep 'kibana-kibana')
 }
 
