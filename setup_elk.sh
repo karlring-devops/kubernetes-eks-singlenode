@@ -107,6 +107,13 @@ rmTiller(){
 	kubectl delete pv pv-standard
 }
 
+rmStorage(){
+	# /-- storage setup ---/
+	kubectl delete sc standard
+	kubectl delete pv pv-standard
+}
+
+
 rmElasticSearch(){	
 	kdelobjs pod default elasticsearch
 	kdelobjs sts default elasticsearch
