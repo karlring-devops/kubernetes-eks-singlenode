@@ -108,6 +108,15 @@ setup_filebeat(){
 	# curl -L -O https://raw.githubusercontent.com/elastic/beats/7.14/deploy/kubernetes/filebeat-kubernetes.yaml
 }
 
+setup_heartbeat(){
+	# Source: https://www.elastic.co/guide/en/beats/heartbeat/current/running-on-kubernetes.html
+        # curl -L -O https://raw.githubusercontent.com/elastic/beats/7.14/deploy/kubernetes/heartbeat-kubernetes.yaml
+	#Change ELASTICSEARCH_HOST -> elasticsearch-master
+
+  kubectl create -f heartbeat-kubernetes.yaml
+}
+
+
 setup_logstash(){
 	# /--- logstash setup ---/
 	helm del --purge logstash
