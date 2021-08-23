@@ -9,6 +9,38 @@ kdelobjs(){  #--- <object_type:pods,svc,nodes,rc,rs,pv,pvc,sts> <namespace> <REX
   done
 }
 
+flistelk(){
+	source ./setup_elk.sh
+	cat <<EOF
+	-----------------------
+	-----Setup Tasks-------
+	-----------------------
+EOF
+  grep '(){' setup_elk.sh | grep setup | tr -d '(){'|grep -v grep
+
+	cat <<EOF
+	-----------------------
+	-----Remove Tasks------
+	-----------------------
+EOF
+  grep '(){' setup_elk.sh | grep rm | tr -d '(){'|grep -v grep
+
+}
+
+
+# sudo mkdir /mnt/data
+# sudo chmod -R 777 /mnt/data
+
+setup_elk(){
+	mkdir -p ~/.devops
+	cd ~/.devops
+	rm -rf kubernetes-elk-singlenode
+	git clone https://github.com/karlring-devops/kubernetes-elk-singlenode.git
+	cd kubernetes-elk-singlenode
+	source ./setup_elk.sh
+	flistelk
+}
+
 
 setup_helm(){
 	# /-- helm setup ---/
