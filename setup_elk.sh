@@ -9,17 +9,10 @@ kdelobjs(){  #--- <object_type:pods,svc,nodes,rc,rs,pv,pvc,sts> <namespace> <REX
   done
 }
 
-setup_code(){
-	mkdir ~/.helm
-	cd kubernetes-elk-singlenode
-	cp *.* ~/.helm/	
-}
 
 setup_helm(){
 	# /-- helm setup ---/
 	kubectl cluster-info
-	mkdir ~/.helm
-	cd ~/.helm
 
 	curl https://raw.githubusercontent.com/kubernetes/Helm/master/scripts/get > get_Helm.sh
 	chmod 700 get_Helm.sh
